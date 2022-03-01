@@ -1,0 +1,62 @@
+package com.te.carwalaproject.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.te.carwalaproject.dao.CarDetailsDao;
+import com.te.carwalaproject.dto.CarDetails;
+
+@Service
+public class CardetailsServiceImpl implements CardetailsService {
+
+	@Autowired
+private	CarDetailsDao carDetailsDao;
+	
+	@Override
+	public boolean insertData(CarDetails details) {
+		System.out.println("hiiiservice!!!"+details);
+			carDetailsDao.save(details);
+			return true;
+	}
+
+	
+	
+	@Override
+	public CarDetails getData(int carId) {
+  if(carId>0) {
+	  return (CarDetails) carDetailsDao.findBycarId(carId);
+  }
+return null;
+		
+	}
+
+
+
+	@Override
+	public boolean removeData(int carId) {
+		if(carId>0) {
+		
+		CarDetails carDetails=carDetailsDao.findBycarId(carId);
+		carDetailsDao.delete(carDetails);
+		return true;
+			
+		}
+		return false;
+	}
+
+
+
+	@Override
+	public boolean updateData(CarDetails carDetails) {
+		if(carDetails!=null) {
+			 carDetailsDao.save(carDetails);
+				return true;
+		}
+	   return false;
+	}
+	
+	
+	
+	
+
+}

@@ -1,0 +1,38 @@
+package com.te.carwalaproject.dto;
+
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name="Super_Admin Table")
+public class SuperAdmin implements Serializable{
+	
+
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Id
+	@Column(name="Identity Number")
+	private int sAdminId;
+	@Column(name=" Super Admin Name")
+	private String sAdminName;
+	@Column(name=" Super Admin Phone Number")
+    private long sAdminContact_No;
+	@Column(name=" Super Admin Gmail")
+	private String sAdminGmail;
+	@Column(name=" Super Admin Role")
+	private String Role;
+	@Column(name=" Super Admin UserName")
+	private String sAdminUserName;
+	@Column(name=" Super Admin Password")
+	private String sAdminPassword;
+	
+
+}

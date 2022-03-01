@@ -1,0 +1,16 @@
+package com.te.carwalaproject.service;
+
+import com.te.carwalaproject.dto.CarDetails;
+import com.te.carwalaproject.model.CarDetailModelInsert;
+
+public interface CardetailsService {
+
+	boolean insertData(CarDetails details);
+
+	CarDetails getData(int carId);
+
+	boolean removeData(int carId);
+
+	boolean updateData(CarDetailModelInsert carDetailModelInsert);
+
+}

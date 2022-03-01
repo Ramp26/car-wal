@@ -1,0 +1,64 @@
+package com.te.carwalaproject.service;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.stereotype.Service;
+
+import com.te.carwalaproject.dao.AdminDao;
+import com.te.carwalaproject.dto.Admin;
+
+@Service
+public class AdminServiceImpl implements AdminService {
+	
+	@Autowired
+	private AdminDao adminDao;
+
+
+
+	@Override
+	public boolean regData(Admin admin) {
+	    String username= adminDao.findByadminUserName(admin.getAdminUserName());
+	    System.out.println(username);
+	     if(username==null) {
+	     String password=adminDao.findByadminPassword(admin.getAdminPassword());
+	     
+	    	if(password == null) {
+	    		adminDao.save(admin);
+	    		return true;
+	    	}else {
+	    		return false;
+	    	}
+	    
+	    }
+	     return false;
+			
+	    
+	}
+
+
+
+
+	@Override
+	public Admin getData(int adminId) {
+		
+		if(adminId>0) {
+			return adminDao.findByadminId(adminId);
+		}
+		return null;
+	}
+
+
+
+
+	@Override
+	public Admin loginData(Admin admin) {
+		
+	
+		
+		return null;
+	}
+
+
+}

@@ -1,0 +1,21 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.te.carwalaproject.dto.SuperAdmin;
+import com.te.carwalaproject.service.SuperAdminService;
+
+@RestController
+public class SuperAdminController {
+
+	@Autowired
+	private SuperAdminService superAdminService;
+	public ResponseEntity<?> regData(SuperAdmin admin) {
+		superAdminService.regData(admin);
+		return null;
+
+	}
+
+}

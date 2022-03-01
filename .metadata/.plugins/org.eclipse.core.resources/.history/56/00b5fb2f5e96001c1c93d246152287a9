@@ -1,0 +1,31 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.te.carwalaproject.dto.CarDetails;
+import com.te.carwalaproject.service.CardetailsService;
+
+@RestController
+public class CarController {
+	
+	@Autowired
+	private CardetailsService cardetailsService;
+	
+	
+	public ResponseEntity<?> insertData(@RequestBody CarDetails details) {
+		
+		try {
+			cardetailsService.insertData(details);
+			return new ResponseEntity<String>("inserted successfully",null);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("invalid data entry", null);
+		}
+		
+		
+	}
+
+}

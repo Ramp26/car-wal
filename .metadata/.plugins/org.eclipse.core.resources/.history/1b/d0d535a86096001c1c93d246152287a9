@@ -1,0 +1,60 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.te.carwalaproject.dto.CarDetails;
+import com.te.carwalaproject.service.CardetailsService;
+
+@RestController
+public class CarController {
+	
+	@Autowired
+	private CardetailsService cardetailsService;
+	
+	
+	@PostMapping("/car")
+	public ResponseEntity<?> insertData(@RequestBody CarDetails details) {
+		
+		try {
+			cardetailsService.insertData(details);
+			return new ResponseEntity<String>("inserted successfully",null);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("invalid data entry", null);
+		}
+		
+		
+	}
+	
+	@GetMapping("/data/{carId}")
+	
+	public ResponseEntity<?> getData( @PathVariable int carId ) {
+		  try {
+			CardetailsService service=cardetailsService.getData(carId);
+			return new ResponseEntity<CardetailsService>(service, null);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("id is not match", null);
+		}
+		
+	}
+	
+	
+	public ResponseEntity<?> removeData(int carId) {
+		
+		try {
+			cardetailsService.removeData(carId);
+			return new ResponseEntity<String>("successfully deleted", null);
+		} catch (Exception e) {
+		return new ResponseEntity<String>("id not found", null);
+		}
+		
+	}
+	
+
+}

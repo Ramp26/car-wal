@@ -1,0 +1,15 @@
+package com.te.carwalaproject.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.te.carwalaproject.dto.CarDetails;
+
+
+
+public interface  CarDetailsDao extends CrudRepository<CarDetails, Integer>  {
+	
+	public CarDetails findByadmminId(int id);
+		
+	
+
+}

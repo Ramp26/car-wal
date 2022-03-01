@@ -1,0 +1,37 @@
+package com.te.carwalaproject.dto;
+
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name="Car_Detail Table")
+public class CarDetails implements Serializable {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int carId;
+	private String carName;
+	private String companyName;
+	private String fuelType;
+	private  Boolean power_Steering;
+	private String break_System;
+	private Double showroom_Price;
+	private Double onroad_price;
+	private String image_URL;
+	private Double Mileage;
+	private int seating_Capacity;
+	private int engine_Capacity;
+	private String gear_Type;
+	private String UserName;
+	
+	
+	
+
+}

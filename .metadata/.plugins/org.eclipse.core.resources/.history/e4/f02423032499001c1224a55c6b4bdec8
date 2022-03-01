@@ -1,0 +1,91 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.te.carwalaproject.dto.Admin;
+import com.te.carwalaproject.dto.MyAdminDetails;
+import com.te.carwalaproject.jwt.JwtPro;
+import com.te.carwalaproject.model.AdminAuthenticateRequest;
+import com.te.carwalaproject.model.AdminAuthenticationResponse;
+import com.te.carwalaproject.service.AdminService;
+
+
+@RestController
+@RequestMapping("/admin")
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	private AuthenticationManager authenticationManager;
+	
+	@Autowired
+	private JwtPro jwtPro;
+	
+	@GetMapping("/get/{adminId}")
+	
+	public ResponseEntity<?> getData(@PathVariable int adminId) {
+		
+		try {
+			Admin admin=adminService.getData(adminId);
+			return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+		} catch (Exception e) {
+		return new ResponseEntity<String>("id is not present ", HttpStatus.NOT_FOUND);
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	@PostMapping("/admin")
+	public ResponseEntity<?> registerData(@RequestBody  Admin admin) {
+		try {
+			boolean res= adminService.regData(admin);
+			return new ResponseEntity<String>("successfully inserted", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("user name is already used", HttpStatus.BAD_REQUEST);
+		}
+		
+	}
+	
+//	
+//	@PostMapping("/login")
+//	public ResponseEntity<?> login(@RequestBody Admin admin) {
+//		try {
+//			Boolean res= adminService.loginData(admin);
+//			return new ResponseEntity<String>("login successfull!!", HttpStatus.OK);
+//		} catch (Exception e) {
+//			return new ResponseEntity<String>(" login Failed",HttpStatus.NO_CONTENT);
+//		}
+//		
+//	}
+	
+	
+		
+	@PostMapping("/login")
+	public ResponseEntity<?> createAuthenticationToken(@RequestBody AdminAuthenticateRequest authenticateRequest)
+			throws Exception {
+		try {
+			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+					authenticateRequest.getAdminUserName(), authenticateRequest.getAdminPassword()));
+		} catch (Exception e) {
+			throw new Exception("Invalid username and password" + e);
+		}
+		MyAdminDetails admin = adminService.loadUserByUsername(authenticateRequest.getAdminUserName());
+		String jwt = jwtPro.generateToken(admin);
+		return ResponseEntity.ok(new AdminAuthenticationResponse(jwt));
+	}
+
+}

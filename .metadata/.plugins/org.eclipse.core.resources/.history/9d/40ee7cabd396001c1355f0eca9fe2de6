@@ -1,0 +1,39 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.te.carwalaproject.dto.SuperAdmin;
+import com.te.carwalaproject.service.SuperAdminService;
+
+@RestController
+public class SuperAdminController {
+
+	@Autowired
+	private SuperAdminService superAdminService;
+	
+	
+	@PostMapping("/superadmin")
+	public ResponseEntity<?> regData(@RequestBody SuperAdmin admin) {
+		try {
+			superAdminService.regData(admin);
+			return new ResponseEntity<String>("registered  Successfull!!", null);
+		} catch (Exception e) {
+		return new ResponseEntity<String>("username or password already used", null);
+		}
+
+	}
+	
+	@GetMapping(/login)	
+	public void name() {
+		
+	}
+	
+	
+	
+
+}

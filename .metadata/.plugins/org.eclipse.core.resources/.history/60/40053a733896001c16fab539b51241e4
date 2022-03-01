@@ -1,0 +1,25 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+
+import com.te.carwalaproject.dto.Admin;
+import com.te.carwalaproject.service.AdminService;
+import com.te.carwalaproject.service.AdminServiceImpl;
+
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	
+	
+	public ResponseEntity<?> registerData( Admin admin) {
+		boolean res= adminServiceImpl.regData(admin);
+		return null;
+		
+	}
+
+}

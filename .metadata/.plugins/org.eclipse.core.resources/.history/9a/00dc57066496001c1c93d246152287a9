@@ -1,0 +1,16 @@
+package com.te.carwalaproject.dao;
+
+import org.springframework.data.repository.CrudRepository;
+
+import com.te.carwalaproject.dto.Admin;
+import com.te.carwalaproject.dto.SuperAdmin;
+
+public interface SuperAdminDao extends CrudRepository<SuperAdmin, Integer> {
+	public SuperAdmin findBysAdminId(int id);
+		
+ public String	findBysAdminUserName(String admin);
+ public String findBysAdminPassword() {
+	
+}
+
+}

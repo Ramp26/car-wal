@@ -1,0 +1,5 @@
+package com.te.carwalaproject.model;
+
+public class CarDetailModel {
+	
+}

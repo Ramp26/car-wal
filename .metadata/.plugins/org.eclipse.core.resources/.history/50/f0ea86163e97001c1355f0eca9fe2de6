@@ -1,0 +1,45 @@
+package com.te.carwalaproject.config;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
+import com.te.carwalaproject.service.SuperAdminServiceImpl;
+
+@EnableWebSecurity
+public class SuperAdminSecurityConfig extends WebSecurityConfigurerAdapter {
+
+	@Autowired
+private SuperAdminServiceImpl superAdminServiceImpl;
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		auth.userDetailsService(superAdminServiceImpl);
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.csrf().disable().
+		cors().disable().
+		authorizeRequests().
+		antMatchers("/admin").
+	    permitAll().
+		antMatchers("/login").
+			permitAll().
+//		hasRole("ADMIN").
+		and().formLogin();
+		
+	}
+	
+	
+	public PasswordEncoder passwordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+		
+	}
+	
+
+}

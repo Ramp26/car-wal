@@ -1,0 +1,9 @@
+package com.te.carwalaproject.config;
+
+import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+
+@EnableWebSecurity
+public class AdminSecurityConfig implements WebSecurityConfigurer<SecurityBuilder<Filter>> {
+
+}

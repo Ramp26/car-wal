@@ -1,0 +1,27 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.te.carwalaproject.dto.Admin;
+import com.te.carwalaproject.service.AdminService;
+
+
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	
+	@PostMapping("/admin")
+	public ResponseEntity<?> registerData(@RequestBody  Admin admin) {
+		boolean res= adminService.regData(admin);
+		return null;
+		
+	}
+
+}

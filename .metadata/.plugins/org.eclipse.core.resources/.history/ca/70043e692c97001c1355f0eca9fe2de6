@@ -1,0 +1,16 @@
+package com.te.carwalaproject.service;
+
+import com.te.carwalaproject.dto.Admin;
+
+public interface AdminService {
+
+	boolean regData(Admin admin);
+
+	Admin getData(int adminId);
+
+	Admin loginData(Admin admin);
+	
+	
+	
+
+}

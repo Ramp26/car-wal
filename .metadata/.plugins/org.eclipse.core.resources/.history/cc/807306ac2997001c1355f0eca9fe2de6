@@ -1,0 +1,63 @@
+package com.te.carwalaproject.service;
+
+import java.util.Collection;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+
+import com.te.carwalaproject.dao.AdminDao;
+import com.te.carwalaproject.dto.Admin;
+import com.te.carwalaproject.dto.MyAdminDetails;
+
+@Service
+public class AdminServiceImpl implements AdminService, UserDetailsService {
+
+	@Autowired
+	private AdminDao adminDao;
+
+	@Override
+	public boolean regData(Admin admin) {
+		Admin username = adminDao.findByadminUserName(admin.getAdminUserName());
+		Admin password = adminDao.findByadminPassword(admin.getAdminPassword());
+	 System.out.println(username);
+System.out.println(password);
+		if(username==null&&password==null) {
+			adminDao.save(admin);
+			return true;
+		}else {
+			return false;
+		}
+
+
+	}
+
+	@Override
+	public Admin getData(int adminId) {
+
+		if (adminId > 0) {
+			return adminDao.findByadminId(adminId);
+		}
+		return null;
+	}
+
+	@Override
+	public Admin loginData(Admin admin) {
+
+		return null;
+	}
+	
+	
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		Admin admin = adminDao.findByadminUserName(username);
+		
+//		Myadmindetail from dto
+		return new MyAdminDetails(admin);
+	}
+
+}

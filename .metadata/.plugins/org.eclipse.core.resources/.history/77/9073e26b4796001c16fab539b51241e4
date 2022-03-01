@@ -1,0 +1,47 @@
+package com.te.carwalaproject.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.te.carwalaproject.dto.Admin;
+import com.te.carwalaproject.service.AdminService;
+
+
+@Controller
+public class AdminController {
+	
+	@Autowired
+	private AdminService adminService;
+	
+	
+	
+	public ResponseEntity<?> getData(@PathVariable int adminId) {
+		
+		try {
+			Admin admin=adminService.getData(adminId);
+			return new ResponseEntity<Admin>(admin, HttpStatus.OK);
+		} catch (Exception e) {
+		return new ResponseEntity<String>("id is not present ", null);
+		}
+		
+	}
+	
+	
+	
+	@PostMapping("/admin")
+	public ResponseEntity<?> registerData(@RequestBody  Admin admin) {
+		try {
+			boolean res= adminService.regData(admin);
+			return new ResponseEntity<String>("successfully inserted", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<String>("user name is already used", HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+	}
+
+}

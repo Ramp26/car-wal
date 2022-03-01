@@ -1,0 +1,22 @@
+package com.te.carwalaproject;
+
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.te.carwalaproject.service.CardetailsService;
+
+@SpringBootApplication
+public class CarWalaProjectApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CarWalaProjectApplication.class, args);
+	}
+
+	CommandLineRunner run(CardetailsService cardetailsService) {
+		return run() -> {
+			
+		};
+		
+	}
+}

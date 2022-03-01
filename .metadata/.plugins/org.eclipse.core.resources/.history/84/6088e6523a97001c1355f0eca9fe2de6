@@ -1,0 +1,30 @@
+package com.te.carwalaproject.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.te.carwalaproject.dao.SuperAdminDao;
+import com.te.carwalaproject.dto.SuperAdmin;
+
+@Service
+public class SuperAdminServiceImpl implements SuperAdminService {
+	
+	@Autowired
+	private SuperAdminDao adminDao;
+
+	@Override
+	public boolean regData(SuperAdmin admin) {
+		
+	String sAuserName=adminDao.findBysAdminUserName(admin.getSAdminUserName());
+	if(sAuserName != null) {
+		String sApassword= adminDao.findBysAdminPassword(admin.getSAdminPassword());
+		if(sApassword != null) {
+			adminDao.save(admin);
+			return true;
+		}
+	}
+		
+		return false;
+	}
+
+}

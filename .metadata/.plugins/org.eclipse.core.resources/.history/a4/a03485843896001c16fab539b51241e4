@@ -1,0 +1,8 @@
+package com.te.carwalaproject.service;
+
+public interface AdminService {
+	
+	
+	
+
+}
