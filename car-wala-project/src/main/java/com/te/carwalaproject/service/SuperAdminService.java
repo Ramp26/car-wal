@@ -1,5 +1,7 @@
 package com.te.carwalaproject.service;
 
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.te.carwalaproject.dto.SuperAdmin;
 
 public interface SuperAdminService {
@@ -8,7 +10,9 @@ public interface SuperAdminService {
 
 	SuperAdmin getData(int sAdminId);
 
-	boolean loginData(SuperAdmin admin);
+//	boolean loginData(SuperAdmin admin);
+
+	UserDetails loadUserByUsername(String adminUserName);
 	
 	
 

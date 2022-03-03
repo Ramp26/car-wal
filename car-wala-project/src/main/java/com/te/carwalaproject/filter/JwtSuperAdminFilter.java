@@ -16,18 +16,22 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.te.carwalaproject.dto.SuperAdmin;
 import com.te.carwalaproject.jwt.JwtPro;
 import com.te.carwalaproject.service.AdminService;
 import com.te.carwalaproject.service.CardetailsService;
+import com.te.carwalaproject.service.SuperAdminService;
 
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter {
+public class JwtSuperAdminFilter extends OncePerRequestFilter {
 
-
-
-	@Autowired
-private AdminService adminService;
+//	@Autowired
+//	private UserDetailsService userDetailsService;
+	
+	
+@Autowired
+private SuperAdminService adminService;
 
 	@Autowired
 	private JwtPro jwtUtil;
@@ -47,7 +51,7 @@ private AdminService adminService;
 		}
 
 		if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-			UserDetails details =this. adminService.loadUserByUsername(userName);
+			UserDetails details =this.adminService.loadUserByUsername(userName);
 			
 			if (jwtUtil.validateToken(jwt, details)) {
 				UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(

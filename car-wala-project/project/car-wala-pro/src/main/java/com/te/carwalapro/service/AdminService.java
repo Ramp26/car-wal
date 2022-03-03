@@ -1,9 +1,12 @@
-package com.te.carwalaproject.service;
+package com.te.carwalapro.service;
 
 import java.util.List;
 
-import com.te.carwalaproject.dto.Admin;
-import com.te.carwalaproject.dto.MyAdminDetails;
+import com.te.carwalapro.dto.Admin;
+import com.te.carwalapro.dto.MyAdminDetails;
+
+
+
 
 public interface AdminService {
 
@@ -14,6 +17,10 @@ public interface AdminService {
 	boolean loginData(Admin admin);
 
 	MyAdminDetails loadUserByUsername(String adminUserName);
+
+	List<Admin> getData1();
+
+	Admin getAdminId(String adminUserName);
 
 //	List<Admin> getData();
 	

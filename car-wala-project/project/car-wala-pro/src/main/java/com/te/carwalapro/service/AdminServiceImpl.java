@@ -1,19 +1,14 @@
-package com.te.carwalaproject.service;
+package com.te.carwalapro.service;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.te.carwalaproject.dao.AdminDao;
-import com.te.carwalaproject.dto.Admin;
-import com.te.carwalaproject.dto.MyAdminDetails;
+import com.te.carwalapro.dao.AdminDao;
+import com.te.carwalapro.dto.Admin;
+import com.te.carwalapro.dto.MyAdminDetails;
 
 @Service
 public class AdminServiceImpl implements AdminService, UserDetailsService {
@@ -23,7 +18,7 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
 
 	@Override
 	public boolean regData(Admin admin) {
-		Admin username = adminDao.findByadminUserName(admin.getAdminUserName());
+		Admin username = adminDao.findByAdminUserName(admin.getAdminUserName());
 		Admin password = adminDao.findByadminPassword(admin.getAdminPassword());
 		System.out.println(username);
 		System.out.println(password);
@@ -43,7 +38,7 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
 	public Admin getData(int adminId) {
 
 		if (adminId > 0) {
-			return adminDao.findByadminId(adminId);
+			return adminDao.findByAdminId(adminId);
 		}
 		return null;
 	}
@@ -65,21 +60,25 @@ public class AdminServiceImpl implements AdminService, UserDetailsService {
 		return false;
 	}
 
-
 	@Override
 	public MyAdminDetails loadUserByUsername(String adminUserName) {
-		Admin admin = adminDao.findByadminUserName(adminUserName);
+		Admin admin = adminDao.findByAdminUserName(adminUserName);
+		System.out.println(admin);
 		return new MyAdminDetails(admin);
 	}
 
-//	@Override
-//	public List<Admin> getData() {
-//		@Query("SELECT adminId FROM Admin adminId " )
-//		return List<Admin> adminDao.findAll();
-//	}
-//		
-	
-	
+	@Override
+	public List<Admin> getData1() {
+
+		return adminDao.findAllAdmin();
+	}
+
+	@Override
+	public Admin getAdminId(String adminUserName) {
+		System.out.println(":::>" + adminDao.findByAdminUserName(adminUserName));
+		
+		return adminDao.findByAdminUserName(adminUserName);
+	}
 
 //	@Override
 //	public MyAdminDetails loadUserByUsername(String username) throws UsernameNotFoundException {

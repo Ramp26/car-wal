@@ -54,19 +54,19 @@ public class SuperAdminServiceImpl implements SuperAdminService,UserDetailsServi
 
 
 
-	@Override
-	public boolean loginData(SuperAdmin admin) {
-		if(admin != null) {
-		SuperAdmin username = adminDao.findBysAdminUserName(admin.getSAdminUserName());
-   System.out.println("login data"+username);
-		SuperAdmin password = adminDao.findBysAdminPassword(admin.getSAdminPassword());
-		if(username.getSAdminId() == password.getSAdminId()) {
-			return true;
-		}
-		return false;
-		}
-		return false;
-	
-	}
+//	@Override
+//	public boolean loginData(SuperAdmin admin) {
+//		if(admin != null) {
+//		SuperAdmin username = adminDao.findBysAdminUserName(admin.getSAdminUserName());
+//   System.out.println("login data"+username);
+//		SuperAdmin password = adminDao.findBysAdminPassword(admin.getSAdminPassword());
+//		if(username.getSAdminId() == password.getSAdminId()) {
+//			return true;
+//		}
+//		return false;
+//		}
+//		return false;
+//	
+//	}
 
 }
